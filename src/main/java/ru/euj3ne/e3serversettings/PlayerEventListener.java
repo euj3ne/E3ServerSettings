@@ -43,15 +43,15 @@ public class PlayerEventListener implements Listener {
         this.protocolManager = ProtocolLibrary.getProtocolManager();
         
         var config = plugin.getConfig();
-        this.noPlayer = config.getBoolean("settings.noplayer");
-        this.noMessage = config.getBoolean("settings.nomessage");
-        this.noDamage = config.getBoolean("settings.nodamage");
-        this.noHunger = config.getBoolean("settings.nohunger");
-        this.noChat = config.getBoolean("settings.nochat");
-        this.noAdvancement = config.getBoolean("settings.noadvancement");
-        this.noCommands = config.getBoolean("settings.enabled.nocommands");
-        this.allowedCommands = config.getStringList("settings.nocommands.allowed_commands");
-        this.gameModeStr = config.getString("setting.gamemode");
+        this.noPlayer = config.getBoolean("settings.noPlayer");
+        this.noMessage = config.getBoolean("settings.noMessage");
+        this.noDamage = config.getBoolean("settings.noDamage");
+        this.noHunger = config.getBoolean("settings.noHunger");
+        this.noChat = config.getBoolean("settings.noChat");
+        this.noAdvancement = config.getBoolean("settings.noAdvancement");
+        this.noCommands = config.getBoolean("settings.noCommands.enabled");
+        this.allowedCommands = config.getStringList("settings.noCommands.allowed_commands");
+        this.gameModeStr = config.getString("settings.gameMode");
 
         if (noPlayer) {
             registerPlayerInfoPacketListener();

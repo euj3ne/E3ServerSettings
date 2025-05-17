@@ -31,8 +31,8 @@ public class BlockEventListener implements Listener {
         this.noPlace = config.getBoolean("settings.noPlace");
         this.noExplosions = config.getBoolean("settings.noExplosions");
         this.noFire = config.getBoolean("settings.noFire");
-        this.fixedTime = config.getBoolean("settings.fixedtime.enabled");
-        this.fixedTimeMeaning = config.getLong("settings.fixedtime.meaning");
+        this.fixedTime = config.getBoolean("settings.fixedTime.enabled");
+        this.fixedTimeMeaning = config.getLong("settings.fixedTime.meaning");
     }
 
     @EventHandler
