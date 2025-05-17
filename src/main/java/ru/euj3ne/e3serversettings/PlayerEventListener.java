@@ -1,7 +1,6 @@
 package ru.euj3ne.e3serversettings;
 
 import org.bukkit.GameMode;
-import org.bukkit.advancement.Advancement;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -9,7 +8,6 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
@@ -33,7 +31,6 @@ public class PlayerEventListener implements Listener {
     private final boolean noDamage;
     private final boolean noHunger;
     private final boolean noChat;
-    private final boolean noAdvancement;
     private final boolean noCommands;
     private final String gameModeStr;
     private final List<String> allowedCommands;
@@ -48,10 +45,10 @@ public class PlayerEventListener implements Listener {
         this.noDamage = config.getBoolean("settings.noDamage");
         this.noHunger = config.getBoolean("settings.noHunger");
         this.noChat = config.getBoolean("settings.noChat");
-        this.noAdvancement = config.getBoolean("settings.noAdvancement");
         this.noCommands = config.getBoolean("settings.noCommands.enabled");
         this.allowedCommands = config.getStringList("settings.noCommands.allowed_commands");
         this.gameModeStr = config.getString("settings.gameMode");
+
 
         if (noPlayer) {
             registerPlayerInfoPacketListener();
@@ -107,17 +104,6 @@ public class PlayerEventListener implements Listener {
     }
 
     @EventHandler
-    public void onAdvancement(PlayerAdvancementDoneEvent event) {
-        if (noAdvancement) {
-            Player player = event.getPlayer();
-            Advancement advancement = event.getAdvancement();
-            player.getAdvancementProgress(advancement).getRemainingCriteria().forEach(criteria -> {
-                player.getAdvancementProgress(advancement).revokeCriteria(criteria);
-            });
-        }
-    }
-
-    @EventHandler
     public void onEntityDamage(EntityDamageEvent event) {
         if (noDamage) {
             event.setCancelled(true);
@@ -146,5 +132,4 @@ public class PlayerEventListener implements Listener {
             }
         }
     }
-    
 }
